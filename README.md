@@ -6,10 +6,10 @@
 
 ## 网站内容
 
-- **首页**：个人空间介绍与主要栏目入口。
-- **作品集**：预留两个项目展示位置，目前均已标注为占位内容。
-- **工具箱**：收录 GitHub、MDN、Can I use、Figma、Excalidraw 和 Notion 六个示例入口，支持开发、设计、效率分类及关键词搜索。
-- **关于**：个人空间介绍与 GitHub 主页链接，个人经历待补充。
+- **首页**：个人空间介绍与主要栏目入口，不展示作品和工具列表。
+- **作品集 `/works.html`**：预留两个项目展示位置，目前均已标注为占位内容。
+- **工具箱 `/tools.html`**：收录 GitHub、MDN、Can I use、Figma、Excalidraw 和 Notion 六个示例入口，支持开发、设计、效率分类及关键词搜索。
+- **关于**（首页底部）：个人空间介绍与 GitHub 主页链接，个人经历待补充。
 
 页面采用响应式布局，适配桌面与手机；支持键盘焦点提示与减少动画偏好。
 
@@ -23,7 +23,10 @@
 │   └── workflows/
 │       └── deploy.yml    # GitHub Pages 自动部署
 ├── public/
-│   ├── index.html        # 页面结构、简介与作品内容
+│   ├── index.html        # 首页简介、栏目入口与关于
+│   ├── works.html        # 作品集
+│   ├── tools.html        # 工具箱、分类与搜索
+│   ├── common.js         # 各页共用的页脚年份
 │   ├── style.css         # 样式与响应式布局
 │   └── app.js            # 工具数据、分类与搜索逻辑
 └── README.md
@@ -46,7 +49,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory public
 编辑 `public/index.html`：
 
 - 首页介绍位于 `.hero` 区域。
-- 作品卡片位于 `#works` 区域；有实际作品后，替换示意图、项目名称和描述，并更新占位标记。
+- 作品卡片在 `public/works.html` 的 `#works` 区域；有实际作品后，替换示意图、项目名称和描述，并更新占位标记。
 - 关于内容位于 `#about` 区域。
 
 ### 添加或修改工具
@@ -65,9 +68,11 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory public
 }
 ```
 
-现有分类为 `开发`、`设计`、`效率`。如需新增分类，同时在 `public/index.html` 的 `.filters` 中添加对应的 `data-category` 按钮。搜索会匹配工具名称、描述和分类，不区分英文大小写。
+现有分类为 `开发`、`设计`、`效率`。如需新增分类，同时在 `public/tools.html` 的 `.filters` 中添加对应的 `data-category` 按钮。搜索会匹配工具名称、描述和分类，不区分英文大小写。
 
-当前工具箱带有“示例收藏”说明；换成自己的收藏后，可同步修改 `public/index.html` 和 `public/app.js` 中的相关文案。
+当前工具箱带有“示例收藏”说明；换成自己的收藏后，可同步修改 `public/tools.html` 和 `public/app.js` 中的相关文案。
+
+三页共用导航与页脚标记，修改时请同步更新三个 HTML 文件；当前页面通过 `aria-current="page"` 标记。“关于”统一链接到 `./index.html#about`。工具逻辑仅在工具箱页面加载。
 
 ### 调整视觉样式
 

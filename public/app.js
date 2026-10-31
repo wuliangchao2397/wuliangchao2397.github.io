@@ -31,5 +31,4 @@ document.querySelectorAll('[data-category]').forEach(button => button.addEventLi
   render();
 }));
 search.addEventListener('input', render);
-document.querySelector('#year').textContent = new Date().getFullYear();
 render();
